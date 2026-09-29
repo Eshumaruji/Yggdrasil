@@ -1,2 +1,2 @@
-3rd sem community project
-title: serket
+3rd sem community project: Yggdrasil
+
