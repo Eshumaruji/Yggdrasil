@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yggdrasil - Blood Donation Management</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="ygg_logo.jpg" style="height:50px;width:50px;background:transparent;" >
+      <h1>Yggdrasil</h1>
+    </div>
+    <div class="topbar-user">
+      <button class="theme-toggle" id="themeToggle" aria-pressed="false">Rare donor theme</button>
+      <span>Central Blood Bank</span>
+      <span class="avatar" aria-hidden="true">CB</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <nav class="sidebar" role="tablist" aria-label="Main sections">
+      <button class="tab active" role="tab" data-target="dashboard">Dashboard</button>
+      <button class="tab" role="tab" data-target="donors">Donors</button>
+      <button class="tab" role="tab" data-target="register">Register donor</button>
+      <button class="tab" role="tab" data-target="requests">Blood requests</button>
+    </nav>
+
+    <main class="content">
+
+      <!-- Dashboard -->
+      <section id="dashboard" class="panel active">
+        <div class="page-head">
+          <div>
+            <h2>Dashboard</h2>
+            <p>Stock levels and activity for today.</p>
+          </div>
+          <div class="btn-row">
+            <button class="btn outline">Export report</button>
+            <button class="btn primary">New donation</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <article class="card stat">
+            <div class="value">1,248</div>
+            <div class="label">Registered donors</div>
+          </article>
+          <article class="card stat">
+            <div class="value">342</div>
+            <div class="label">Units in stock</div>
+          </article>
+          <article class="card stat">
+            <div class="value">18</div>
+            <div class="label">Donations today</div>
+          </article>
+          <article class="card stat rare">
+            <div class="value">14</div>
+            <div class="label">Rare-group donors</div>
+          </article>
+          <article class="card alert">
+            <div class="value">5</div>
+            <div class="label">Urgent requests open</div>
+          </article>
+        </div>
+
+        <h2>Stock by blood group</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="blood-type">O-</span>
+            <h3>12 units</h3>
+            <p class="meta">Running low</p>
+            <span class="badge">Low stock</span>
+          </article>
+          <article class="card">
+            <span class="blood-type">A+</span>
+            <h3>84 units</h3>
+            <p class="meta">Updated 2 hours ago</p>
+            <span class="badge ok">Healthy</span>
+          </article>
+          <article class="card">
+            <span class="blood-type">B+</span>
+            <h3>61 units</h3>
+            <p class="meta">Updated 2 hours ago</p>
+            <span class="badge ok">Healthy</span>
+          </article>
+          <article class="card rare">
+            <span class="blood-type">hh</span>
+            <h3>2 units</h3>
+            <p class="meta">Bombay group, very rare</p>
+            <span class="badge rare">Rare</span>
+          </article>
+          <article class="card">
+            <span class="blood-type">AB-</span>
+            <h3>7 units</h3>
+            <p class="meta">Running low</p>
+            <span class="badge">Low stock</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- Donors -->
+      <section id="donors" class="panel">
+        <div class="page-head">
+          <div>
+            <h2>Donors</h2>
+            <p>Search and manage registered donors.</p>
+          </div>
+          <div class="field">
+            <label for="search">Search donors</label>
+            <input id="search" type="search" placeholder="Name or blood group">
+          </div>
+        </div>
+
+        <div class="card table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Blood group</th><th>Last donation</th><th>Status</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ananya Rao</td><td>O-</td><td>12 Jun 2026</td>
+                <td><span class="badge ok">Eligible</span></td>
+                <td><button class="btn outline small">Contact</button></td>
+              </tr>
+              <tr class="rare">
+                <td>Karan Shah <span class="badge rare">Rare</span></td><td>Bombay (hh)</td><td>18 Apr 2026</td>
+                <td><span class="badge ok">Eligible</span></td>
+                <td><button class="btn primary small">Contact</button></td>
+              </tr>
+              <tr>
+                <td>Rahul Verma</td><td>A+</td><td>02 Sep 2026</td>
+                <td><span class="badge">Resting</span></td>
+                <td><button class="btn outline small" disabled>Contact</button></td>
+              </tr>
+              <tr>
+                <td>Meera Nair</td><td>B+</td><td>20 May 2026</td>
+                <td><span class="badge ok">Eligible</span></td>
+                <td><button class="btn outline small">Contact</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Register -->
+      <section id="register" class="panel">
+        <div class="page-head">
+          <div>
+            <h2>Register donor</h2>
+            <p>Add a new donor to the registry.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <form class="form" onsubmit="event.preventDefault(); alert('Donor saved');">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" type="text" placeholder="e.g. Ananya Rao" required>
+            </div>
+            <div class="field">
+              <label for="dob">Date of birth</label>
+              <input id="dob" type="date" required>
+            </div>
+            <div class="field">
+              <label for="group">Blood group</label>
+              <select id="group" required>
+                <option value="">Select group</option>
+                <option>A+</option><option>A-</option>
+                <option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option>
+                <option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input id="phone" type="tel" placeholder="+91 98765 43210">
+              <span class="hint">Used only for donation reminders.</span>
+            </div>
+            <div class="field full">
+              <label for="notes">Medical notes</label>
+              <textarea id="notes" rows="3" placeholder="Allergies, medications, recent illness"></textarea>
+            </div>
+            <div class="field full">
+              <label class="check">
+                <input type="checkbox"> I confirm the donor has given consent
+              </label>
+            </div>
+            <div class="field full">
+              <div class="btn-row">
+                <button type="submit" class="btn primary">Save donor</button>
+                <button type="reset" class="btn ghost">Clear form</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Requests -->
+      <section id="requests" class="panel">
+        <div class="page-head">
+          <div>
+            <h2>Blood requests</h2>
+            <p>Open requests from hospitals.</p>
+          </div>
+          <button class="btn primary">New request</button>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="blood-type">O-</span>
+            <h3>City General Hospital</h3>
+            <p class="meta">3 units needed by 6:00 PM today</p>
+            <span class="badge">Urgent</span>
+            <div class="btn-row" style="margin-top: 1rem;">
+              <button class="btn primary small">Fulfil</button>
+              <button class="btn outline small">Details</button>
+            </div>
+          </article>
+          <article class="card">
+            <span class="blood-type">B+</span>
+            <h3>St. Mary's Clinic</h3>
+            <p class="meta">2 units needed by tomorrow</p>
+            <span class="badge ok">Stock available</span>
+            <div class="btn-row" style="margin-top: 1rem;">
+              <button class="btn primary small">Fulfil</button>
+              <button class="btn outline small">Details</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      const rare = root.dataset.theme === 'rare';
+      if (rare) { delete root.dataset.theme; } else { root.dataset.theme = 'rare'; }
+      toggle.setAttribute('aria-pressed', String(!rare));
+    });
+
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
