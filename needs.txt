@@ -1,0 +1,11 @@
+donor:
+ -register: reg details, location, age>18, no hiv, aids, blood type
+ -community: posts, blood dono camps,
+ -dash: request to join orgs
+ -emergency: physical ned/ blood donation notif, phone explode
+blood bank:
+ -register: org details, hosting dono camps y/n, public/private donors
+ -dash: adding donors to personal list, requesting public donors, send blood camp notif
+requestors:
+ -register: clinic/hosp details, location
+ -dash: request bank
