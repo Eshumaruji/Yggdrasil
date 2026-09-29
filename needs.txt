@@ -1,11 +1,23 @@
 donor:
  -register: reg details, location, age>18, no hiv, aids, blood type
- -community: posts, blood dono camps,
- -dash: request to join orgs
- -emergency: physical ned/ blood donation notif, phone explode
+            if blood type is rare, congrats you're a shiny pokemon, you can save a ton of people with your blood
+            make their entire dashboard shiny
+            5x points boost
+            simple guide link to vids (skippable)
+ -guide: link to vids, blood dono, emergency req guide
+ -community: posts: like comment share report
+             blood dono camps: register for event, get to event and scan, scan again after you're done, get community service points
+             leaderboard: holy donos, 
+ -dash: request to join orgs(reccomend from region), book appointments for donos, 
+ -emergency: blood donation notif, google map location, estimate total time it'll take
 blood bank:
  -register: org details, hosting dono camps y/n, public/private donors
- -dash: adding donors to personal list, requesting public donors, send blood camp notif
+ -dash: private list: add donors: if they use app, app notif, else sms message
+        requesting public donors: notify nearby donors, if amount of donors is satisfied, mark emergency as criteria fulfilled
+                                  show number of donors accepting quest, scan a qr twice to get points, feedback both ways
+        send blood camp notif: registered thro webp, people scanned twice will have details of blood bag saved
+        clinics/hosp requests: requestor details, if available accept(manual) else reject(blood na/service na)
+                               show map, dist, est time
 requestors:
  -register: clinic/hosp details, location
- -dash: request bank
+ -dash: request blood, delivery or pickup, map, dist, est time
