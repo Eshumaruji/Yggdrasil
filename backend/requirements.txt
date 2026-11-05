@@ -1,0 +1,8 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic[email]>=2.6        # [email] installs email-validator for EmailStr
+firebase-admin>=6.5
+cloudinary>=1.40
+geopy>=2.4
+python-multipart>=0.0.9     # required by FastAPI for UploadFile / Form data
+python-dotenv>=1.0
