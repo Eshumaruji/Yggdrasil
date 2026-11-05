@@ -54,9 +54,12 @@ class Collections:
 
     DONORS = "donors"
     BLOOD_BANKS = "blood_banks"
+    BLOOD_BAGS = "blood_bags"
     REQUESTORS = "requestors"
     EMERGENCY_QUESTS = "emergency_quests"
     HOSPITAL_REQUESTS = "hospital_requests"
+    NOTIFICATIONS = "notifications"
+    APPOINTMENTS = "appointments"
     CAMPS = "camps"
     POSTS = "community_posts"
 
