@@ -11,12 +11,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import config  # noqa: F401  (initialises Firebase + Cloudinary on import)
 from routers import (
     blood_banks,
-    # camps,
-    # community,
+    community,
     donors,
-    # hospital_requests,
-    # quests,
-    # requestors,
+    requestors,
 )
 
 app = FastAPI(
@@ -38,11 +35,8 @@ app.add_middleware(
 for module in (
     donors,
     blood_banks,
-    # requestors,
-    # quests,
-    # hospital_requests,
-    # camps,
-    # community,
+    requestors,
+    community,
 ):
     app.include_router(module.router)
 
