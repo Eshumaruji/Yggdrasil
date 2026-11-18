@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yggdrasil Blood Network</title>
+
+  <!-- Leaflet CSS (must load before the Leaflet script) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- Shared Yggdrasil theme -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Page-specific tweaks that sit on top of the shared theme -->
+  <style>
+    main.smooth-sections { scroll-behavior: smooth; }
+    .hero-sec { overflow: hidden; }
+    .hero-content .btn-red { margin-top: 4px; }
+    .hero-tagline { font-size: 20px; color: #333; margin-bottom: 24px; }
+
+    .login-card .badge-shiny { margin: 6px 0 14px; }
+    .login-card .btn-red, .login-card .btn-grey { width: 100%; margin-top: 12px; }
+
+    .radar-header .radar-title { line-height: 1.1; }
+    .interactive-map { min-height: 300px; }
+    .radar-status { font-size: 18px; color: #333; margin-top: 10px; min-height: 1.4em; }
+
+    /* Pixel-square marker used for blood banks */
+    .bank-marker {
+      width: 18px; height: 18px;
+      background: var(--button-red);
+      border: 3px solid var(--border-dark);
+      box-shadow: inset 2px 2px 0 rgba(255,255,255,0.35);
+    }
+    .bank-popup strong { color: var(--text-red); display: block; font-size: 18px; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 4px solid #ffd700;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .yggdrasil-bg { font-size: 6rem; }
+      .radar-frame { height: 75vh; }
+      .radar-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      main.smooth-sections { scroll-behavior: auto; }
+      .btn-down, .badge-shiny { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="smooth-sections" id="top">
+
+    <!-- ===================== 1. HERO ===================== -->
+    <section class="hero-sec" id="hero" aria-labelledby="hero-title">
+      <div class="yggdrasil-bg" aria-hidden="true">Yggdrasil</div>
+
+      <div class="hero-content">
+        <h1 id="hero-title">Yggdrasil Blood Network</h1>
+        <p class="hero-tagline">A community blood donor registry and emergency request system.</p>
+        <a class="btn-red" href="#portals" data-scroll>Choose your portal</a>
+      </div>
+
+      <a class="btn-red btn-down" href="#portals" data-scroll aria-label="Scroll down to the login portals">
+        Explore &#9660;
+      </a>
+    </section>
+
+    <!-- ===================== 2. LOGIN CARDS ===================== -->
+    <section class="login-sec" id="portals" aria-labelledby="portals-title">
+      <h2 id="portals-title" style="color: var(--text-red); font-size: 34px; margin-bottom: 24px; text-align: center;">
+        Who are you logging in as?
+      </h2>
+
+      <div class="login-grid">
+
+        <!-- Donor -->
+        <article class="login-card">
+          <svg class="card-icon" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Blood drop">
+            <rect x="3" y="0" width="2" height="2" fill="#7c1a1a"/>
+            <rect x="2" y="2" width="4" height="2" fill="#7c1a1a"/>
+            <rect x="1" y="4" width="6" height="3" fill="#7c1a1a"/>
+            <rect x="2" y="7" width="4" height="1" fill="#7c1a1a"/>
+            <rect x="2" y="4" width="1" height="2" fill="#e88"/>
+          </svg>
+          <h2>Donor Portal</h2>
+          <span class="badge-shiny" title="Example of a rare blood badge">Rare blood O- &times;5 points</span>
+          <p>Register as a donor, answer emergencies near you, and earn points on the leaderboard. Rare blood groups earn extra.</p>
+          <a class="btn-red" href="donor-dashboard.html">Login / Register</a>
+        </article>
+
+        <!-- Blood bank -->
+        <article class="login-card">
+          <svg class="card-icon" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Blood bank building">
+            <rect x="3" y="0" width="2" height="1" fill="#7c1a1a"/>
+            <rect x="2" y="1" width="4" height="1" fill="#7c1a1a"/>
+            <rect x="1" y="2" width="6" height="1" fill="#7c1a1a"/>
+            <rect x="1" y="3" width="6" height="5" fill="#7c1a1a"/>
+            <rect x="3" y="5" width="2" height="3" fill="#222"/>
+            <rect x="3" y="3" width="2" height="1" fill="#fff"/>
+          </svg>
+          <h2>Blood Bank Portal</h2>
+          <p>Post emergency quests to nearby donors, host donation camps, and scan donors in and out.</p>
+          <a class="btn-red" href="blood-bank-dashboard.html">Login / Register</a>
+        </article>
+
+        <!-- Requestor -->
+        <article class="login-card">
+          <svg class="card-icon" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Hospital cross">
+            <rect width="8" height="8" fill="#222"/>
+            <rect x="1" y="1" width="6" height="6" fill="#7c1a1a"/>
+            <rect x="3" y="2" width="2" height="4" fill="#fff"/>
+            <rect x="2" y="3" width="4" height="2" fill="#fff"/>
+          </svg>
+          <h2>Requestor Portal</h2>
+          <p>Hospitals and clinics: request blood from nearby blood banks and track their response.</p>
+          <a class="btn-red" href="requestor-dashboard.html">Login / Register</a>
+        </article>
+
+      </div>
+
+      <a class="btn-grey" href="#radar" data-scroll style="margin-top: 28px;">See blood banks near you &#9660;</a>
+    </section>
+
+    <!-- ===================== 3. MAP ===================== -->
+    <section class="map-sec" id="radar" aria-labelledby="radar-title">
+      <div class="radar-frame">
+        <div class="radar-header">
+          <h2 class="radar-title" id="radar-title">Regional Blood Banks &amp; Emergency Radar</h2>
+          <button class="btn-grey" id="locate-btn" type="button">Find my location</button>
+        </div>
+
+        <div id="map" class="interactive-map" role="region" aria-label="Map of nearby blood banks"></div>
+        <p class="radar-status" id="radar-status" aria-live="polite"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    // ------------------------------------------------------------------
+    // Smooth scrolling inside the scroll-snap container
+    // ------------------------------------------------------------------
+    document.querySelectorAll("[data-scroll]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const target = document.querySelector(link.getAttribute("href"));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    // ------------------------------------------------------------------
+    // Map
+    // ------------------------------------------------------------------
+    const API_BASE = "http://127.0.0.1:8000"; // FastAPI backend (uvicorn main:app --reload)
+    const statusEl = document.getElementById("radar-status");
+
+    const map = L.map("map", { zoomControl: true }).setView([20.5937, 78.9629], 5); // India overview
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    const bankLayer = L.layerGroup().addTo(map);
+    const bankIcon = L.divIcon({
+      className: "",
+      html: '<div class="bank-marker"></div>',
+      iconSize: [18, 18],
+      iconAnchor: [9, 9],
+      popupAnchor: [0, -10],
+    });
+
+    /**
+     * Draw blood banks on the map.
+     * banks: [{ name, lat, lng, address?, phone?, distance_km? }, ...]
+     * Popup content is built with DOM nodes (not HTML strings), so names or
+     * addresses from the API can never inject markup.
+     */
+    function showBloodBanks(banks) {
+      bankLayer.clearLayers();
+      const points = [];
+
+      banks.forEach((b) => {
+        if (typeof b.lat !== "number" || typeof b.lng !== "number") return;
+
+        const popup = document.createElement("div");
+        popup.className = "bank-popup";
+        const title = document.createElement("strong");
+        title.textContent = b.name || "Blood bank";
+        popup.appendChild(title);
+        [b.address, b.phone, b.distance_km != null ? `${b.distance_km} km away` : null]
+          .filter(Boolean)
+          .forEach((line) => {
+            const row = document.createElement("div");
+            row.textContent = line;
+            popup.appendChild(row);
+          });
+
+        L.marker([b.lat, b.lng], { icon: bankIcon, title: b.name }).bindPopup(popup).addTo(bankLayer);
+        points.push([b.lat, b.lng]);
+      });
+
+      if (points.length) map.fitBounds(points, { padding: [40, 40], maxZoom: 14 });
+      statusEl.textContent = points.length
+        ? `${points.length} blood bank(s) shown.`
+        : "No blood banks to show yet.";
+    }
+    window.showBloodBanks = showBloodBanks; // callable from other scripts or the console
+
+    // Once your backend has a public list endpoint, load the banks here, e.g.:
+    //   fetch(`${API_BASE}/blood-banks`).then(r => r.json()).then(showBloodBanks);
+    showBloodBanks([]);
+
+    // Centre the map on the visitor (only when they click the button)
+    document.getElementById("locate-btn").addEventListener("click", () => {
+      if (!navigator.geolocation) {
+        statusEl.textContent = "Your browser does not support location.";
+        return;
+      }
+      statusEl.textContent = "Finding your location...";
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const here = [pos.coords.latitude, pos.coords.longitude];
+          map.setView(here, 13);
+          L.circleMarker(here, { radius: 8, color: "#222", weight: 3, fillColor: "#ffd700", fillOpacity: 1 })
+            .addTo(map)
+            .bindPopup("You are here");
+          statusEl.textContent = "Showing your area.";
+        },
+        () => { statusEl.textContent = "Location blocked. Allow location access in your browser and try again."; }
+      );
+    });
+
+    // The map sits in a section that is off-screen on load; make Leaflet re-measure it.
+    new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) map.invalidateSize();
+    }, { threshold: 0.3 }).observe(document.getElementById("radar"));
+  </script>
+</body>
+</html>

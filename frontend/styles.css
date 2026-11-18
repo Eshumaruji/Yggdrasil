@@ -1,0 +1,365 @@
+/* ==========================================================================
+   YGGDRASIL - SHARED  CSS (style.css)
+   Inspired by Applied energestics UI & Blood-Red Palette in image_4.png
+   ========================================================================== */
+
+/* Load a pixelated/game-style font for the ultimate look */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+  /* Colors inspired by the blood-red retro palette in image_4.png */
+  --bg-color: #b2b9bb;          /* Light grey block pattern back layer */
+  --panel-bg: #e2e8e9;         /* Content inner panel background */
+  --button-red: #7c1a1a;       /* Dark retro red */
+  --button-hover: #9c2a2a;     /* Bright crimson hover */
+  --button-active: #5c1111;    /* Deep red for active presses */
+  --border-dark: #222222;      /* Outlines and borders */
+  --border-highlight: #ffffff;  /* Light highlights on border edges */
+  --text-dark: #111111;        /* Dark panel text */
+  --text-red: #820e0e;         /* Title / notification red text */
+  --text-light: #ffffff;       /* Text for red buttons */
+  
+  /* Font fallbacks (use VT323 for massive pixel vibe, falls back to monospace) */
+  --font-pixel: "VT323", "Courier New", Courier, monospace;
+}
+
+/* ==========================================================================
+   Reset & Base Layout
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* Disable modern anti-aliasing for the sharp pixelated render style */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  text-rendering: optimizeSpeed;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-color);
+  /* Minecraft-style tiled block visual pattern */
+  background-image: 
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  color: var(--text-dark);
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+/* Scroll snap containers for the full viewport scroll experience */
+main.smooth-sections {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+section {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+/* ==========================================================================
+   Retro Border Styling (Double Border/Outline Effect as in image_4.png)
+   ========================================================================== */
+.retro-border {
+  border: 4px solid var(--border-dark);
+  box-shadow: 
+    inset -3px -3px 0px rgba(0,0,0,0.2), 
+    inset 3px 3px 0px rgba(255,255,255,0.4);
+}
+
+.sub-panel-border {
+  border: 3px solid var(--border-dark);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Components: Red Button (Minecraft Sidebar & Grid style)
+   ========================================================================== */
+.btn-red {
+  background-color: var(--button-red);
+  color: var(--text-light);
+  font-family: var(--font-pixel);
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 16px;
+  cursor: pointer;
+  
+  /* Double Outline/Highlight Block Button */
+  border: 4px solid var(--border-dark);
+  border-bottom-color: #3b0a0a;
+  border-right-color: #3b0a0a;
+  box-shadow: 
+    inset -3px -3px 0px #3b0a0a,
+    inset 3px 3px 0px rgba(255, 255, 255, 0.2);
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.05s ease, background-color 0.1s ease;
+}
+
+.btn-red:hover {
+  background-color: var(--button-hover);
+  color: var(--text-light);
+}
+
+.btn-red:active {
+  background-color: var(--button-active);
+  border: 4px solid var(--border-dark);
+  border-top-color: #000;
+  border-left-color: #000;
+  box-shadow: inset 3px 3px 0px rgba(0,0,0,0.5);
+  transform: translateY(2px);
+}
+
+/* Grey UI Action Button */
+.btn-grey {
+  background-color: #cccccc;
+  color: var(--text-dark);
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  padding: 14px;
+  cursor: pointer;
+  
+  border: 4px solid var(--border-dark);
+  border-bottom-color: #777;
+  border-right-color: #777;
+  box-shadow: 
+    inset -3px -3px 0px #777,
+    inset 3px 3px 0px rgba(255, 255, 255, 0.5);
+}
+
+.btn-grey:hover {
+  background-color: #dfdfdf;
+}
+
+.btn-grey:active {
+  background-color: #999999;
+  border-top-color: #000;
+  border-left-color: #000;
+  box-shadow: inset 3px 3px 0px rgba(0,0,0,0.5);
+}
+
+/* ==========================================================================
+   Homepage Sections
+   ========================================================================== */
+
+/* Section 1: Hero view */
+.hero-sec {
+  background: radial-gradient(circle, rgba(139,0,0,0.3) 0%, rgba(26,26,26,0.95) 100%), var(--bg-color);
+  background-size: cover;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.yggdrasil-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15rem; /* Massive transparent brand background */
+  font-family: var(--font-pixel);
+  color: rgba(139, 0, 0, 0.08);
+  font-weight: 900;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-content {
+  z-index: 2;
+  background-color: rgba(226, 232, 233, 0.9);
+  padding: 40px;
+  max-width: 650px;
+  border: 5px solid var(--border-dark);
+  box-shadow: 10px 10px 0px rgba(0,0,0,0.15);
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  color: var(--text-red);
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 0px #ffcccb;
+  letter-spacing: 1px;
+}
+
+.hero-content p {
+  font-size: 22px;
+  margin-bottom: 30px;
+  color: var(--text-dark);
+}
+
+.btn-down {
+  margin-top: 40px;
+  animation: bounce 1.5s infinite;
+  z-index: 2;
+}
+
+/* Section 2: Login Cards container */
+.login-sec {
+  background-color: var(--bg-color);
+}
+
+.login-grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* User Card Designs */
+.login-card {
+  flex: 1;
+  background-color: var(--panel-bg);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 4px solid var(--border-dark);
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.15);
+}
+
+.login-card h2 {
+  font-size: 28px;
+  color: var(--text-red);
+  margin-bottom: 15px;
+  border-bottom: 3px solid var(--border-dark);
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+.login-card p {
+  font-size: 18px;
+  color: #333333;
+  margin-bottom: auto; /* Push button to bottom edge */
+  padding: 15px 0;
+}
+
+.card-icon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 15px;
+  object-fit: contain;
+}
+
+/* "Shiny Pokemon Badge Effect" inside Cards as requested */
+.badge-shiny {
+  background: linear-gradient(135deg, #ffd700, #ff8c00, #ff0055, #ffd700);
+  background-size: 300% 300%;
+  color: #ffffff;
+  border: 3px solid var(--border-dark);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 8px;
+  margin-top: 8px;
+  display: inline-block;
+  animation: shimmer 4s infinite linear, pulsate 2s infinite ease-in-out;
+  text-shadow: 1.5px 1.5px 0px #000;
+  box-shadow: inset -2px -2px 0px rgba(0,0,0,0.4);
+}
+
+/* Section 3: Radar Map Frame */
+.map-sec {
+  background-color: #2b2b2b;
+}
+
+.radar-frame {
+  width: 90%;
+  max-width: 1200px;
+  height: 80%;
+  background-color: var(--panel-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 4px solid var(--border-dark);
+}
+
+.radar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.radar-title {
+  font-size: 26px;
+  color: var(--text-red);
+}
+
+.interactive-map {
+  flex-grow: 1;
+  background-color: #ccd7d9;
+  border: 4px solid var(--border-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Leaflet integration fix to maintain game aesthetic */
+.leaflet-container {
+  font-family: var(--font-pixel) !important;
+  font-size: 14px !important;
+  image-rendering: pixelated;
+}
+
+/* ==========================================================================
+   Retro Animations
+   ========================================================================== */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulsate {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .login-grid {
+    flex-direction: column;
+  }
+  section {
+    height: auto;
+    min-height: 100vh;
+  }
+  .hero-content h1 {
+    font-size: 34px;
+  }
+}
