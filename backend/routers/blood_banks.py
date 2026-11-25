@@ -262,6 +262,39 @@ def register_blood_bank(payload: BloodBankCreate) -> dict:
 
     return {"message": "Blood bank registered successfully.", "blood_bank": bank.model_dump()}
 
+@router.get("/nearby")
+def get_nearby_blood_banks(
+    lat: float = Query(..., ge=-90, le=90),
+    lng: float = Query(..., ge=-180, le=180),
+    radius_km: float = Query(default=NEARBY_RADIUS_KM, gt=0, le=200),
+) -> dict:
+    """Public endpoint for the landing-page map to find nearby blood banks."""
+    banks = [_with_id(s) for s in db.collection(Collections.BLOOD_BANKS).stream()]
+    nearby = filter_by_radius(banks, (lat, lng), radius_km)
+
+    results = []
+    for b in nearby:
+        dist = b["distance_km"]
+        eta = round(dist / AVG_CITY_SPEED_KMH * 60, 1)
+        results.append(
+            {
+                "id": b["id"],
+                "name": b.get("name"),
+                "address": b.get("address"),
+                "phone": b.get("phone"),
+                "email": b.get("email"),
+                "region": b.get("region"),
+                "lat": b.get("lat"),
+                "lng": b.get("lng"),
+                "logo_url": b.get("logo_url"),
+                "hosts_camps": b.get("hosts_camps", False),
+                "donor_mode": b.get("donor_mode"),
+                "distance_km": dist,
+                "estimated_time_min": eta,
+            }
+        )
+
+    return {"count": len(results), "radius_km": radius_km, "blood_banks": results}
 
 # ==========================================================================
 # 7. Feedback (static path, declared before the /{bank_id}/... routes)
