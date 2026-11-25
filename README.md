@@ -1,4 +1,4 @@
-# LifeFlow: Blood Donation Management Platform
+# Yggdrasil
 
 A web platform that connects **donors**, **blood banks** and **requestors** (clinics and hospitals), so blood reaches the people who need it faster.
 

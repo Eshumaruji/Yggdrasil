@@ -21,6 +21,8 @@
     <span class="watermark">YGGDRASIL</span>
   </div>
 
+  <div class="progress" id="scrollProgress" aria-hidden="true"></div>
+
   <!-- ───────── Top navigation ───────── -->
   <header class="nav">
     <a class="brand" href="#top" aria-label="Yggdrasil home">
@@ -45,61 +47,19 @@
         </div>
       </div>
 
-      <div class="art" aria-hidden="true">
-        <svg viewBox="0 70 520 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="dropBody" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#FF8A80"/><stop offset=".35" stop-color="#E53935"/><stop offset=".8" stop-color="#B71C1C"/><stop offset="1" stop-color="#7F0F0F"/></radialGradient>
-            <linearGradient id="dropShine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-            <radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFCDD2" stop-opacity=".9"/><stop offset="1" stop-color="#FFCDD2" stop-opacity="0"/></radialGradient>
-            <linearGradient id="skinA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C9A8"/><stop offset="1" stop-color="#E7AE86"/></linearGradient>
-            <linearGradient id="skinB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9A47E"/><stop offset="1" stop-color="#C58B62"/></linearGradient>
-            <filter id="soft" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur stdDeviation="8"/></filter>
-          </defs>
-          <circle cx="260" cy="170" r="170" fill="url(#halo)"/>
-          <ellipse cx="260" cy="346" rx="190" ry="14" fill="#C62828" opacity=".13" filter="url(#soft)"/>
-          <path class="flow" d="M132 222 C 190 150, 330 150, 388 222" fill="none" stroke="#E53935" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 10" opacity=".55"/>
-          <g>
-            <path d="M70 346v-70c0-26 20-46 46-46h34c26 0 46 20 46 46v70Z" fill="#fff" stroke="#FFCDD2" stroke-width="2"/>
-            <path d="M70 346v-70c0-26 20-46 46-46h34c26 0 46 20 46 46v70Z" fill="#FFEBEE" opacity=".6"/>
-            <rect x="111" y="206" width="44" height="30" rx="14" fill="url(#skinA)"/>
-            <circle cx="133" cy="178" r="34" fill="url(#skinA)"/>
-            <path d="M99 175c-4-26 14-42 36-42 22 0 38 14 34 40-8-14-22-20-36-20-14 0-26 8-34 22Z" fill="#3E2723"/>
-            <circle cx="122" cy="182" r="2.8" fill="#3E2723"/><circle cx="145" cy="182" r="2.8" fill="#3E2723"/>
-            <path d="M123 195q10 8 21 0" fill="none" stroke="#B5543F" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M170 262c28 4 44 -6 58 -22" fill="none" stroke="url(#skinA)" stroke-width="20" stroke-linecap="round"/>
-            <rect x="204" y="236" width="18" height="14" rx="4" fill="#fff" stroke="#E53935" stroke-width="2" transform="rotate(-35 213 243)"/>
-          </g>
-          <g>
-            <path d="M310 346v-70c0-26 20-46 46-46h34c26 0 46 20 46 46v70Z" fill="#E53935"/>
-            <path d="M310 346v-70c0-26 20-46 46-46h34c26 0 46 20 46 46v70Z" fill="#C62828" opacity=".35"/>
-            <rect x="365" y="206" width="44" height="30" rx="14" fill="url(#skinB)"/>
-            <circle cx="387" cy="178" r="34" fill="url(#skinB)"/>
-            <path d="M353 178c-2-24 14-40 36-40 24 0 38 16 32 40-6-12-16-18-30-18-14 0-30 6-38 18Z" fill="#212121"/>
-            <circle cx="376" cy="182" r="2.8" fill="#212121"/><circle cx="399" cy="182" r="2.8" fill="#212121"/>
-            <path d="M377 195q10 8 21 0" fill="none" stroke="#8D4A36" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M376 276c-8-9-18-15-18-24 0-6 5-10 10-10 4 0 7 2 8 5 1-3 4-5 8-5 5 0 10 4 10 10 0 9-10 15-18 24Z" fill="#fff" transform="translate(0 4)"/>
-            <path d="M320 262c-28 4-44-6-58-22" fill="none" stroke="url(#skinB)" stroke-width="20" stroke-linecap="round"/>
-          </g>
-          <g class="bob" transform="translate(260 120)">
-            <circle r="30" fill="#fff" stroke="#FFCDD2" stroke-width="2"/>
-            <path d="M0 15C-10 6-17 0-17-8c0-6 4-10 9-10 4 0 7 2 8 5 1-3 4-5 8-5 5 0 9 4 9 10 0 8-7 14-17 23Z" fill="#E53935"/>
-          </g>
-          <g class="float-big" transform="translate(260 252)">
-            <ellipse cx="0" cy="84" rx="46" ry="9" fill="#7F0F0F" opacity=".25" filter="url(#soft)"/>
-            <path d="M0-92C-30-52-70-18-70 28a70 70 0 0 0 140 0C70-18 30-52 0-92Z" fill="url(#dropBody)"/>
-            <path d="M-38 6c-6 26 8 48 30 56" fill="none" stroke="url(#dropShine)" stroke-width="10" stroke-linecap="round" opacity=".9"/>
-            <ellipse cx="-22" cy="-18" rx="8" ry="16" fill="#fff" opacity=".55" transform="rotate(28 -22 -18)"/>
-            <path d="M0 30 m-22 0 h14 l5-12 8 26 6-14 h16" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
-          </g>
-          <g fill="#E53935" opacity=".6">
-            <circle class="tw t1" cx="60" cy="90" r="4"/><circle class="tw t2" cx="470" cy="110" r="5"/><circle class="tw t3" cx="440" cy="40" r="3"/><circle class="tw t2" cx="90" cy="30" r="3"/>
-          </g>
-        </svg>
-      </div>
-
       <svg class="pulse" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="sweepFade" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+            <stop offset=".75" stop-color="#fff"/>
+            <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="sweepMask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="60">
+            <rect class="pulse__sweep" x="0" y="0" width="180" height="60" fill="url(#sweepFade)" />
+          </mask>
+        </defs>
         <path class="pulse__ghost" d="M0 30H170l12-6 10 6h26l14-24 20 48 16-24h24l12-6 10 6H600" />
-        <path class="pulse__line" d="M0 30H170l12-6 10 6h26l14-24 20 48 16-24h24l12-6 10 6H600" />
+        <path class="pulse__line" mask="url(#sweepMask)" d="M0 30H170l12-6 10 6h26l14-24 20 48 16-24h24l12-6 10 6H600" />
       </svg>
     </section>
 
@@ -232,10 +192,15 @@
     </section>
   </main>
 
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
   <footer class="foot">© <span id="year"></span> Yggdrasil · Community blood donor registry and emergency request system</footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Firebase config + app logic are ES modules (Firebase Web SDK v10 modular) -->
+  <script src="js/smooth-scroll.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
