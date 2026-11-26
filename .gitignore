@@ -3,3 +3,4 @@ serviceAccountKey.json
 requirements.txt
 .env
 __pycache__
+firebase-config.js
