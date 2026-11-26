@@ -1,6 +1,7 @@
 documentation
-serviceAccountKey.json
-requirements.txt
+backend/serviceAccountKey.json
+backend/.env
+backend/venv/
 .env
-__pycache__
+__pycache__/
 firebase-config.js

@@ -17,7 +17,7 @@ export const firebaseConfig = {
 };
 
 /** FastAPI base URL (uvicorn main:app --reload). */
-export const API_BASE = "http://127.0.0.1:8000";
+export const API_BASE = "https://yggdrasil-six-sepia.vercel.app/";
 
 /**
  * Public endpoint for the landing-page map. Expected response:
