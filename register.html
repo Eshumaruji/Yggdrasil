@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Register · Yggdrasil</title>
+  <meta name="description" content="Create your Yggdrasil account as a donor, blood bank or hospital / clinic." />
+  <meta name="theme-color" content="#C62828" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/register.css" />
+</head>
+<body>
+  <!-- Background: same decorative layer as the other pages -->
+  <div class="bg" aria-hidden="true">
+    <span class="blob blob--a"></span><span class="blob blob--b"></span>
+    <span class="drop drop--1"></span><span class="drop drop--2"></span><span class="drop drop--3"></span>
+    <span class="drop drop--4"></span><span class="drop drop--5"></span><span class="drop drop--6"></span>
+    <span class="watermark">YGGDRASIL</span>
+  </div>
+  <div class="progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="index.html" aria-label="Yggdrasil home">
+      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c-3.2 4.2-6.5 7.6-6.5 11.6a6.5 6.5 0 0 0 13 0c0-4-3.3-7.4-6.5-11.6Z" fill="currentColor"/></svg>
+      <span>Yggdrasil</span>
+    </a>
+    <div class="nav__right">
+      <a class="btn btn--ghost btn--sm" href="index.html">Back to home</a>
+    </div>
+  </header>
+
+  <main class="reg" id="top">
+    <div class="reg__wrap">
+      <div class="reg__head">
+        <h1 id="regTitle">Create your Yggdrasil account</h1>
+        <p class="muted" id="regLead">Choose how you will use Yggdrasil, then finish your profile.</p>
+      </div>
+
+      <!-- 3-option role selector (built by js/register.js) -->
+      <fieldset class="reg__roles" id="roleSelect">
+        <legend class="sr-only">Register as</legend>
+      </fieldset>
+
+      <ol class="reg__steps" aria-label="Registration progress">
+        <li id="stepDot1" class="is-current" aria-current="step"><b>1</b> Account</li>
+        <li id="stepDot2"><b>2</b> Profile</li>
+      </ol>
+
+      <div class="reg__card">
+        <div id="alert" aria-live="polite"></div>
+        <p class="muted" id="authLoading">Checking your session…</p>
+
+        <!-- Step 1: Firebase account -->
+        <section id="step1" aria-labelledby="h-step1" hidden>
+          <h2 id="h-step1">Create your account</h2>
+          <button class="btn btn--ghost btn--block" id="googleBtn" type="button">
+            <svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.5 12.2c0-.8-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2.1-1.9 3.3-4.700 3.3-7.900Z"/><path fill="#34A853" d="M12 23c3 0 5.500-1 7.300-2.700l-3.500-2.700c-1 .7-2.300 1.100-3.800 1.100-2.900 0-5.400-2-6.300-4.600H2.100v2.800A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.700 14.100a6.600 6.600 0 0 1 0-4.200V7.100H2.100a11 11 0 0 0 0 9.800l3.600-2.800Z"/><path fill="#EA4335" d="M12 5.400c1.600 0 3.100.6 4.200 1.700l3.100-3.100A11 11 0 0 0 2.100 7.100l3.600 2.800C6.600 7.400 9.100 5.400 12 5.400Z"/></svg>
+            <span class="btn__label">Continue with Google</span><span class="btn__spinner" aria-hidden="true"></span>
+          </button>
+          <p class="reg__or"><span>or sign up with email</span></p>
+          <form id="signupForm" class="reg__form">
+            <div class="form-grid">
+              <div class="field span-2"><label for="su-name">Full name</label><input id="su-name" name="name" type="text" required minlength="2" maxlength="100" autocomplete="name" /></div>
+              <div class="field span-2"><label for="su-email">Email</label><input id="su-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" /></div>
+              <div class="field span-2"><label for="su-pass">Password <span class="muted-inline">(at least 6 characters)</span></label><input id="su-pass" name="password" type="password" required minlength="6" autocomplete="new-password" /></div>
+            </div>
+            <button class="btn btn--block" type="submit"><span class="btn__label">Create account</span><span class="btn__spinner" aria-hidden="true"></span></button>
+          </form>
+        </section>
+
+        <!-- Step 2: role profile (forms built by js/register.js) -->
+        <section id="step2" aria-labelledby="h-step2" hidden>
+          <div class="reg__signed" id="signedIn" hidden>
+            <span>Signed in as <b id="signedEmail"></b></span>
+            <button class="btn btn--ghost btn--sm" id="signOutBtn" type="button">Sign out</button>
+          </div>
+          <h2 id="h-step2">Your profile</h2>
+          <p class="muted" id="roleBlurb"></p>
+          <div id="forms"></div>
+        </section>
+
+        <!-- Success / shiny banner -->
+        <section id="done" class="reg__done" aria-live="polite" hidden>
+          <div class="reg__shiny" id="shinyBadge" hidden>
+            <span class="reg__shiny-tag">Shiny Rare Blood Badge</span>
+            <strong id="shinyGroup"></strong>
+            <span id="shinyMult"></span>
+          </div>
+          <h2 id="doneTitle">You are registered</h2>
+          <p id="doneMsg" class="muted"></p>
+          <a class="btn" id="doneBtn" href="index.html">Continue</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+  <footer class="foot">© <span id="year"></span> Yggdrasil · Registration</footer>
+
+  <script src="js/smooth-scroll.js"></script>
+  <script type="module" src="js/register.js"></script>
+</body>
+</html>

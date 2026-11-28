@@ -1,0 +1,86 @@
+/* Registration page: multi-step and role-specific form styling only.
+   Shared look comes from style.css (--red-700, --bg, --card, --line, --font-head, --font-body).
+   Everything is scoped under .reg so it cannot clash with other pages. */
+
+[hidden] { display: none !important; }
+
+.reg { --r: var(--red-700, #C62828); padding: 28px 16px 56px; font-family: var(--font-body, Inter, system-ui, sans-serif); }
+.reg__wrap { max-width: 760px; margin: 0 auto; }
+.reg__head h1 { font-family: var(--font-head, Poppins, sans-serif); font-size: clamp(1.7rem, 4.5vw, 2.4rem); line-height: 1.15; margin-bottom: 6px; }
+.reg .muted-inline { font-weight: 400; font-size: .85em; color: var(--muted, #6b6b6b); }
+.reg .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Role selector */
+.reg__roles { border: 0; margin: 20px 0 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; min-width: 0; }
+.reg .role { display: block; cursor: pointer; }
+.reg .role__box { display: block; height: 100%; padding: 12px 14px; background: var(--card, #fff); border: 1.5px solid var(--line, #e6d8d8); border-radius: 14px; transition: border-color .15s, background .15s; }
+.reg .role__box b { display: block; font-family: var(--font-head, Poppins, sans-serif); font-size: 1rem; }
+.reg .role__box small { color: var(--muted, #6b6b6b); }
+.reg .role input:checked + .role__box { border-color: var(--r); background: color-mix(in srgb, var(--r) 8%, var(--card, #fff)); box-shadow: 0 0 0 1px var(--r); }
+.reg .role input:focus-visible + .role__box { outline: 3px solid color-mix(in srgb, var(--r) 45%, transparent); outline-offset: 2px; }
+
+/* Stepper */
+.reg__steps { list-style: none; display: flex; gap: 18px; margin: 0 0 14px; padding: 0; font-weight: 500; color: var(--muted, #6b6b6b); }
+.reg__steps li { display: flex; align-items: center; gap: 8px; }
+.reg__steps b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line, #e6d8d8); background: var(--card, #fff); font-size: .85rem; }
+.reg__steps .is-current { color: inherit; }
+.reg__steps .is-current b, .reg__steps .is-done b { background: var(--r); border-color: var(--r); color: #fff; }
+
+/* Card */
+.reg__card { background: var(--card, #fff); border: 1px solid var(--line, #e6d8d8); border-radius: 20px; padding: clamp(18px, 4vw, 32px); box-shadow: 0 10px 30px rgba(120, 20, 20, .08); }
+.reg__card h2 { font-family: var(--font-head, Poppins, sans-serif); font-size: 1.3rem; margin-bottom: 10px; }
+.reg__card .muted { margin-bottom: 14px; }
+
+/* Forms */
+.reg .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; margin: 14px 0 18px; }
+.reg .span-2 { grid-column: 1 / -1; }
+.reg .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.reg .field label { font-weight: 600; font-size: .92rem; }
+.reg input:not([type="checkbox"]):not([type="radio"]), .reg select { width: 100%; font: inherit; color: inherit; padding: 11px 13px; background: var(--bg, #fff7f5); border: 1.5px solid var(--line, #e6d8d8); border-radius: 10px; }
+.reg input:focus-visible, .reg select:focus-visible { outline: 3px solid color-mix(in srgb, var(--r) 35%, transparent); border-color: var(--r); }
+.reg input[readonly] { opacity: .75; cursor: not-allowed; }
+.reg .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; cursor: pointer; }
+.reg .check input { margin-top: 4px; accent-color: var(--r); }
+.reg .check--box { padding: 12px 14px; border: 1.5px solid var(--line, #e6d8d8); border-radius: 10px; background: var(--bg, #fff7f5); }
+.reg .field__note { font-size: .88rem; color: var(--muted, #6b6b6b); }
+.reg .geo { flex-direction: row; align-items: center; flex-wrap: wrap; }
+
+/* Buttons: spinner + full width helpers (the look itself comes from style.css) */
+.reg .btn--block { width: 100%; justify-content: center; }
+.reg .g-logo { width: 18px; height: 18px; flex: none; }
+.reg .btn__spinner { display: none; width: 1em; height: 1em; margin-left: 8px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: reg-spin .7s linear infinite; }
+.reg .btn.is-loading .btn__spinner { display: inline-block; }
+.reg .btn[disabled] { opacity: .7; cursor: progress; }
+@keyframes reg-spin { to { transform: rotate(360deg); } }
+
+.reg__or { display: flex; align-items: center; gap: 12px; margin: 18px 0 4px; color: var(--muted, #6b6b6b); font-size: .9rem; }
+.reg__or::before, .reg__or::after { content: ""; flex: 1; height: 1px; background: var(--line, #e6d8d8); }
+
+/* Alerts */
+.reg .alert { padding: 12px 14px; margin-bottom: 16px; border-radius: 12px; border: 1.5px solid; font-size: .95rem; }
+.reg .alert ul { margin: 6px 0 0 18px; }
+.reg .alert--error { background: #fdecec; border-color: #e57373; color: #8e1b1b; }
+.reg .alert--success { background: #e9f7ee; border-color: #66bb6a; color: #1b5e20; }
+.reg .alert--info { background: #eef4fd; border-color: #7aa7e6; color: #1a3f73; }
+
+/* Signed-in badge */
+.reg__signed { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; margin-bottom: 14px; border: 1.5px solid var(--line, #e6d8d8); border-radius: 999px; background: var(--bg, #fff7f5); font-size: .92rem; }
+.reg__signed b { word-break: break-all; }
+
+/* Success + shiny banner */
+.reg__done { text-align: center; padding: 8px 0; }
+.reg__done .btn { margin-top: 8px; }
+.reg__shiny { display: grid; gap: 4px; justify-items: center; margin: 0 auto 18px; padding: 18px 16px; max-width: 420px; color: #fff; border-radius: 16px; border: 2px solid #5c1111; background: linear-gradient(135deg, #ffd54f, #ff8f00, #d81b60, #ffd54f); background-size: 300% 300%; animation: reg-shimmer 4s linear infinite; text-shadow: 1px 1px 0 rgba(0, 0, 0, .55); }
+.reg__shiny-tag { font-family: var(--font-head, Poppins, sans-serif); font-weight: 700; }
+.reg__shiny strong { font-family: var(--font-head, Poppins, sans-serif); font-size: 2rem; }
+@keyframes reg-shimmer { 0% { background-position: 0 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+
+@media (max-width: 560px) {
+  .reg__roles { grid-template-columns: 1fr; }
+  .reg .form-grid { grid-template-columns: 1fr; }
+  .reg__steps { gap: 12px; font-size: .92rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reg__shiny, .reg .btn__spinner { animation-duration: 0s; animation: none; }
+  .reg .btn.is-loading .btn__spinner { border-right-color: currentColor; }
+}
